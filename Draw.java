@@ -1014,7 +1014,7 @@ public class Draw implements MouseListener {
 
         image.add(mi8);
 
-        mi2.setText("end");
+        mi2.setText("end program");
 
         m.add(file);
 
@@ -1563,10 +1563,10 @@ public class Draw implements MouseListener {
         p.add(main);
         p.setLayout(null);
         p.setBackground(Color.black);
-        main.setFont(new Font("arial", Font.BOLD, 70));
+        main.setFont(new Font("gulim", Font.BOLD, 50));
         main.setBounds(0, 0, j.getWidth(), j.getHeight());
-        main.setBackground(Color.orange);
-        main.setForeground(Color.WHITE);
+        main.setBackground(Color.gray);
+        main.setForeground(Color.blue);
         CLR = Color.BLUE;
         btn.setSelectedColor(CLR);
         main.addActionListener(new ActionListener() {
@@ -1581,11 +1581,24 @@ public class Draw implements MouseListener {
         });
         Thread t1 = new Thread() {
             public void run() {
+                int x = 0;
                 while (true) {
                     try {
                         Thread.sleep(100);
-                        main.setText(main.getText() + ".");
-                        if (main.getText().length() > 90) {
+                        if(x > 20 && x <50) {
+                            main.setText(main.getText().replace("starting up", "loading modules"));
+                        } else if(x > 50 && x <70) {
+                            main.setText(main.getText().replace("loading modules", "starting modules"));
+                        } else if(x > 70 && x <90) {
+                            main.setText(main.getText().replace("starting modules", "done loading modules"));
+                        } else if(x > 90 && x <132) {
+                            main.setText(main.getText().replace("done loading modules ", "done/please wait"));
+                            main.setText(main.getText().replace(".", ""));
+                        }
+                        x++;
+                        if(x < 132)
+                            main.setText(main.getText() + ".");
+                        if (x > 132) {
                             break;
                         }
                     } catch (Exception e) {
